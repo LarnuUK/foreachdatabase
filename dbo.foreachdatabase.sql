@@ -63,7 +63,8 @@ AS BEGIN
         SELECT d.database_id,
                d.[name]
         FROM sys.databases d
-        WHERE (d.database_id <= 4 AND @Skip_System = 0) OR (d.database_id > 4 AND @Skip_User = 0)
+        WHERE (((d.database_id <= 4 OR d.is_distributor = 1) AND @Skip_System = 0)
+           OR (d.database_id > 4 AND @Skip_User = 0 AND d.is_distributor = 0))
           AND d.state_desc != 'OFFLINE';
 
     SET @Command_Run = @Command_Run + @CRLF + @CRLF +
