@@ -55,14 +55,14 @@ A single character to denote what character will be replaced by the database nam
 ### @Skip_System
 A bit to denote if system databases should be skipped by the procedure; this includes `master`, `msdb`, `tempdb`, `model` and any databases marked as a distributor database. If the value `1`/`TRUE` is passed, then system databases will not have statements from `@Command` run against them.
 
-`@Skip_System` is not required. The default value is `0`. `NULL` is not a permissable value and will cause error 62405 to be returned.
+`@Skip_System` is not required. The default value is `0`. `NULL` is not a permissable value and will cause error 62402 to be returned.
 
 The value of `@Skip_System` is ignored if `@Database_List` is provided containing rows.
 
 ### @Skip_User
 A bit to denote if users databases should be skipped by the procedure (these are any databases not denoted as a system database per `@skip_system`). If the value `1`/`TRUE` is passed, then user databases will not have statements from `@Command` run against them.
 
-`@Skip_User` is not required. The default value is `0`. `NULL` is not a permissable value and will cause error 62404 to be returned.
+`@Skip_User` is not required. The default value is `0`. `NULL` is not a permissable value and will cause error 62402 to be returned.
 
 The value of `@Skip_User_` is ignored if `@Database_List` is provided containing rows.
 
@@ -84,7 +84,7 @@ A bit to denote if on encountering an error against a specific database if the e
 
 If set to `1` then the entire batch will be aborted and a `ROLLBACK` completed for as much as possible. If set to `0` then the batch will continue. The error will be `PRINT`ed and the procedure will also return the last error number generated as its `RETURN` value.
 
-`@Auto_Use` is not required. The default value is `1`. `NULL` is not a permissable value and will cause error 62406 to be returned.
+`@Exit_On_Error` is not required. The default value is `1`. `NULL` is not a permissable value and will cause error 62403 to be returned.
 
 ### @Pre_Command
 A command to be executed prior to the execution of `@Command` for each database. `@Pre_Command` is run within the `master` database; use an explicit `USE` statement to have the statement run in a different database. Can be any string data type, however, `nvarchar(MAX)` is recommended.

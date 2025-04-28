@@ -19,30 +19,46 @@ Licenced under CC BY-ND 4.0
 AS BEGIN
 
     --Do some checking of passed values first
+    DECLARE @ErrorMessage nvarchar(2000);
+
     --Check that @Skip_System, @Skip_User aren't both 0 or that @Database_List has some rows
     IF (@Skip_System = 1 AND @Skip_User = 1 AND NOT EXISTS (SELECT 1 FROM @Database_List))
         THROW 62401, N'System and User databases cannot be skipped if a Database List is not supplied.', 16;
 
-    IF @Delimit_Character IS NULL OR @Delimit_Character = ''
-        THROW 62402, N'@Delimit_Character cannot have a value of NULL or ''''.', 16;
+    IF @Delimit_Character IS NULL OR @Delimit_Character = '' BEGIN
+        SET @ErrorMessage = FORMATMESSAGE(N'%s cannot have a value of NULL or ''''.',N'@Delimit_Character');
+        THROW 62402, @ErrorMessage, 16;
+    END;
 
-    IF @Quote_Character IS NULL OR @Quote_Character = ''
-        THROW 62403, N'@Quote_Character cannot have a value of NULL or ''''.', 16; 
+    IF @Quote_Character IS NULL OR @Quote_Character = '' BEGIN
+        SET @ErrorMessage = FORMATMESSAGE(N'%s cannot have a value of NULL or ''''.',N'@Quote_Character');
+        THROW 62402, @ErrorMessage, 16;
+    END;
 
-    IF @Skip_User IS NULL
-        THROW 62404, N'@Skip_User cannot have a value of NULL.', 16;
+    IF @Skip_User IS NULL BEGIN
+        SET @ErrorMessage = FORMATMESSAGE(N'%s cannot have a value of NULL.',N'@Skip_User');
+        THROW 62403, @ErrorMessage, 16;
+    END;
 
-    IF @Skip_System IS NULL
-        THROW 62405, N'@Skip_System cannot have a value of NULL.', 16;
+    IF @Skip_System IS NULL BEGIN
+        SET @ErrorMessage = FORMATMESSAGE(N'%s cannot have a value of NULL.',N'@Skip_System');
+        THROW 62403, @ErrorMessage, 16;
+    END;
 
-    IF @Exit_On_Error IS NULL
-        THROW 62406, N'@Exit_On_Error cannot have a value of NULL.', 16;
+    IF @Exit_On_Error IS NULL BEGIN
+        SET @ErrorMessage = FORMATMESSAGE(N'%s cannot have a value of NULL.',N'@Exit_On_Error');
+        THROW 62403, @ErrorMessage, 16;
+    END;
 
-    IF @Auto_Use IS NULL
-        PRINT N'@Auto_Use has a value of NULL. Behaviour will be as if the value is 0.';
+    IF @Auto_Use IS NULL BEGIN
+        SET @ErrorMessage = FORMATMESSAGE(N'Msg 62404, Level 1, State 1' + NCHAR(10) +N'%s has a value of NULL. Behaviour will be as if the value is 0.',N'@Exit_On_Error')
+        PRINT @ErrorMessage;
+    END;
 
-    IF @WhatIf IS NULL
-        PRINT N'@WhatIf has a value of NULL. Behaviour will be as if the value is 0.';
+    IF @WhatIf IS NULL BEGIN
+        SET @ErrorMessage = FORMATMESSAGE(N'Msg 62404, Level 1, State 1' + NCHAR(10) +N'%s has a value of NULL. Behaviour will be as if the value is 0.',N'@WhatIf')
+        PRINT @ErrorMessage;
+    END;s
 
     DECLARE @CRLF nchar(2) = NCHAR(13) + NCHAR(10);
     DECLARE @RC int;
