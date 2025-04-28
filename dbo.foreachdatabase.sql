@@ -3,7 +3,7 @@ CREATE OR ALTER PROC [dbo].[foreachdatabase] @Command nvarchar(MAX),
                                @Quote_Character nchar(1) = N'&', --Character to be replaced with a single quoted (') version of the datbaase name I.e. 'master'
                                @Skip_System bit = 0, --Omits master, msdb, tempdb and model. Ignored if @Database_List has data.
                                @Skip_User bit = 0, --Omits all user databases. Ignored if @Database_List has data.
-                               @Database_List t.objectlist READONLY, --If @Skip_System and @Skip_User equal 1, and this is empty, an error will be thrown
+                               @Database_List dbo.objectlist READONLY, --If @Skip_System and @Skip_User equal 1, and this is empty, an error will be thrown
                                @Auto_Use bit = 0, --Automatically starts each command agaisnt a database with a USE
                                @Exit_On_Error bit = 1, --If an error is occurs against a single database, the command will still be run against the remainder. Otherwise everything is rolled back
                                                        --This does not effect the @Pre_Command and @Post_Command statements
