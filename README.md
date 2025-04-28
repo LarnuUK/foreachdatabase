@@ -2,8 +2,10 @@
 A cursor free alternative to sp_msforeachdb with additional parameters.
 
 # Requirements
-`foreachdatabase` - SQL Server 2012+ (Does not support Azure SQL Database)
-`foreachdatabase_agg` - SQL Server 2017+ (Does not support Azure SQL Database)
+`foreachdatabase` - SQL Server 2012+
+`foreachdatabase_agg` - SQL Server 2017+ 
+
+Azure SQL Database is not supported, as these are contained databases, and do not allow for use of `USE` statements or 3+ part naming on objects.
 
 # Deployment
 Execute the `dbo.objectlist.sql` and then `dbo.foreachdatabase.sql` files in your desired database. The schema can be changed from `dbo` without issue; just note that the schema for the `@Database_List` must be updated if the schema of `objectlist` is changed.
