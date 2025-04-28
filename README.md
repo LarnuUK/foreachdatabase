@@ -114,7 +114,7 @@ EXEC dbo.foreachdatabase @Command = N'INSERT INTO #Counts (DatabaseName, TableCo
                          @Post_Command = N'SELECT DatabaseName, TableCount FROM #Counts;'
 ```
 
-### Provide a specific list of databases and ignore errors
+## Provide a specific list of databases and ignore errors
 Execute a command, stored in the variable `@Command`, to be run against an explicit list of databases. Also ignore any errors that may occur in each database:
 ```sql
 DECLARE @Databases dbo.objectlist;
@@ -127,7 +127,7 @@ EXEC dbo.foreachdatabase @Command = @Command,
                          @Exit_On_Error = 0;
 ```
 
-### Overide default quote character and object the statements that would be run for tests
+## Overide default quote character and object the statements that would be run for tests
 Prepared the statements to be run against each database, in the variable `@Command`, but not execute them, and store the statement(s) would be run in the variable `@StatementsToBeRun`. Also overide the value of the quote character to a pipe (`|`).
 ```sql
 DECLARE @StatementsToBeRun nvarchar(MAX);
