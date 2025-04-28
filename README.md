@@ -2,10 +2,13 @@
 A cursor free alternative to sp_msforeachdb with additional parameters.
 
 # Requirements
-SQL Server 2012+ (Does not support Azure SQL Database)
+`foreachdatabase` - SQL Server 2012+ (Does not support Azure SQL Database)
+`foreachdatabase_agg` - SQL Server 2017+ (Does not support Azure SQL Database)
 
 # Deployment
 Execute the `dbo.objectlist.sql` and then `dbo.foreachdatabase.sql` files in your desired database. The schema can be changed from `dbo` without issue; just note that the schema for the `@Database_List` must be updated if the schema of `objectlist` is changed.
+
+An alternative solution, using `STRING_AGG`, is also available in `dbo.foreachdatabase_agg.sql`.
 
 # Usage
 By default, the `?` charater is used for replacement of the database name, like with sp_msforeachdb. The most basic usage would be to simply provide the command you want as a literal: `EXEC dbo.foreachdatabase N'USE ?; SELECT DB_NAME();'`. The procedure has the ability to have both pre and post commends run, using the `@Pre_Command` and `@Post_Command` parameters, and returns the command run in the `@Command_run` `OUTPUT` parameter. The `@WhatIf` parameter can be used in conjuction with the `@Command_run` parameter to get the statement(s) that would be run without it actually executing them.
