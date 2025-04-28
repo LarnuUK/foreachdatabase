@@ -2,7 +2,7 @@
 A cursor free alternative to sp_msforeachdb with additional parameters.
 
 # Requirements
-`foreachdatabase` - SQL Server 2012+
+`foreachdatabase` - SQL Server 2012+  
 `foreachdatabase_agg` - SQL Server 2017+ 
 
 Azure SQL Database is not supported, as these are contained databases, and do not allow for use of `USE` statements or 3+ part naming on objects.
