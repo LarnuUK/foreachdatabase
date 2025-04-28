@@ -35,6 +35,9 @@ AS BEGIN
     IF @Skip_System IS NULL
         THROW 62405, N'@Skip_System cannot have a value of NULL.', 16;
 
+    IF @Exit_On_Error IS NULL
+        THROW 62406, N'@Exit_On_Error cannot have a value of NULL.', 16;
+
     IF @Auto_Use IS NULL
         PRINT N'@Auto_Use has a value of NULL. Behaviour will be as if the value is 0.';
 
