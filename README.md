@@ -50,7 +50,7 @@ A single character to denote what character will be replaced by the database nam
 ### @Quote_Character
 A single character to denote what character will be replaced by the database name in single quote identified format with a notation character prefixed, for example `N'msdb'`, in the `@Command` parameter. **Any instances** of the character in the parameter will be replaced. Can be any string type of length `1`, however, `nchar` is recommended.
 
-`@Quote_Character` is not required. The default value is `N'&'`. `NULL` is not a permissable value and will cause error 62403 to be returned.
+`@Quote_Character` is not required. The default value is `N'&'`. `NULL` is not a permissable value and will cause error 62402 to be returned.
 
 ### @Skip_System
 A bit to denote if system databases should be skipped by the procedure; this includes `master`, `msdb`, `tempdb`, `model` and any databases marked as a distributor database. If the value `1`/`TRUE` is passed, then system databases will not have statements from `@Command` run against them.
@@ -64,7 +64,7 @@ A bit to denote if users databases should be skipped by the procedure (these are
 
 `@Skip_User` is not required. The default value is `0`. `NULL` is not a permissable value and will cause error 62402 to be returned.
 
-The value of `@Skip_User_` is ignored if `@Database_List` is provided containing rows.
+The value of `@Skip_User` is ignored if `@Database_List` is provided containing rows.
 
 ### @Database_List
 A table variable, of type `dbo.objectlist` containing an explicit list of databases to run statements against; no other databases will be run against. If  `@Database_List` is provided containing rows then the values of `@Skip_User` and `@Skip_System` are ignored.
@@ -138,7 +138,7 @@ EXEC dbo.foreachdatabase @Command = @Command,
 ```
 
 ## Overide default quote character and object the statements that would be run for tests
-Prepared the statements to be run against each database, in the variable `@Command`, but not execute them, and store the statement(s) would be run in the variable `@StatementsToBeRun`. Also override the value of the quote character to a pipe (`|`).
+Prepare the statements to be run against each database, in the variable `@Command`, but not execute them, and store the statement(s) would be run in the variable `@StatementsToBeRun`. Also override the value of the quote character to a pipe (`|`).
 ```sql
 DECLARE @StatementsToBeRun nvarchar(MAX);
 
