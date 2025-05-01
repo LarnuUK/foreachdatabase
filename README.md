@@ -77,7 +77,7 @@ If a database name is provided that does not exist in the system, no statements 
 ### @Auto_Use
 A bit to denote if prior to each command against the database, a `USE` statement to change database context should be used.
 
-`@Auto_Use` is not required. The default value is `0`; a value of `NULL` will be treated as `0`.
+`@Auto_Use` is not required. The default value is `0`; a value of `NULL` will be treated as `0` and informational warning 62404 will be raised.
 
 ### @Exit_On_Error
 A bit to denote if on encountering an error against a specific database if the entire process should be aborted or not.
@@ -104,7 +104,7 @@ Provides the full set of statements that would (or was) executed by `dbo.foreach
 ### @WhatIf
 A bit to denote that no statements should be run against each database. If set to `1` the statements are only prepared and not executed. Should be used alongside `@Command_Run` to obtain what statement(s) will have been executed.
 
-`@WhatIf` is not required. The default value is `0`; a value of `NULL` will be treated as `0`.
+`@WhatIf` is not required. The default value is `0`; a value of `NULL` will be treated as `0` and informational warning 62404 will be raised.
 
 # Examples
 
