@@ -58,7 +58,7 @@ AS BEGIN
     IF @WhatIf IS NULL BEGIN
         SET @ErrorMessage = FORMATMESSAGE(N'Msg 62404, Level 1, State 1' + NCHAR(10) +N'%s has a value of NULL. Behaviour will be as if the value is 0.',N'@WhatIf')
         PRINT @ErrorMessage;
-    END;s
+    END;
 
     DECLARE @CRLF nchar(2) = NCHAR(13) + NCHAR(10);
     DECLARE @RC int;
