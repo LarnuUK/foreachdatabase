@@ -112,9 +112,9 @@ AS BEGIN
     SET @Command_Run = @Command_Run + ISNULL(@CRLF + @CRLF + N'/* --- Post Command Begin. --- */' + @CRLF + @CRLF + N'USE master;' + @CRLF + @CRLF + @Post_Command + @CRLF + @CRLF + N'/* --- Post Command End. --- */', N'');
     
     IF @WhatIf = 0
-        EXEC sp_executesql @Command_Run, N'@RC int OUTPUT', @RC = @RC;
-    ELSE
         PRINT N'What if: see value returned from @Command_Run.';
+    ELSE
+        EXEC sp_executesql @Command_Run, N'@RC int OUTPUT', @RC = @RC;
 
     SET @RC = ISNULL(@RC, 0);
     RETURN @RC;
